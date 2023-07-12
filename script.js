@@ -7,6 +7,7 @@ const showMore = document.getElementById("show-more");
 
 let keyword = '';
 let page = 1;
+let loadedPages = 0;
 
 async function searchImages() {
 	keyword = searchBox.value;
@@ -16,10 +17,11 @@ async function searchImages() {
 	const data = await response.json();
 
 	if(page === 1){
-		searchResult.innerHTML = "";
+		searchResult.innerHTML = ""; 
 	}
 
 	const results = data.results;
+
 
 	results.map((result) => {
 		const image = document.createElement("img");
@@ -31,16 +33,32 @@ async function searchImages() {
 		imageLink.appendChild(image);
 		searchResult.appendChild(imageLink);
 	})
-	showMore.style.display = "block";
+	//showMore.style.display = "block";
 }
 
 searchForm.addEventListener("submit", (e) =>{
 	e.preventDefault();
 	page = 1;
+	loadedPages = 0;
 	searchImages();
 });
 
-showMore.addEventListener("click", () =>{
+/*showMore.addEventListener("click", () =>{
 	page++;
 	searchImages();
-})
+})*/
+window.addEventListener("scroll", () => {
+    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+    if (scrollTop + clientHeight >= scrollHeight) {
+    	if (loadedPages >= 15) {
+    		alert("You have reached the end.");
+    		return;
+    	}
+        page++;
+        loadedPages++;
+        searchImages();
+    }
+});
+
+
+
