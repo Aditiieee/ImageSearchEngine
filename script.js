@@ -33,7 +33,7 @@ async function searchImages() {
 		imageLink.appendChild(image);
 		searchResult.appendChild(imageLink);
 	})
-	//showMore.style.display = "block";
+	showMore.style.display = "block";
 }
 
 searchForm.addEventListener("submit", (e) =>{
@@ -43,11 +43,11 @@ searchForm.addEventListener("submit", (e) =>{
 	searchImages();
 });
 
-/*showMore.addEventListener("click", () =>{
+showMore.addEventListener("click", () =>{
 	page++;
 	searchImages();
-})*/
-window.addEventListener("scroll", () => {
+})
+/*window.addEventListener("scroll", () => {
     const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
     if (scrollTop + clientHeight >= scrollHeight) {
     	if (loadedPages >= 15) {
@@ -58,7 +58,7 @@ window.addEventListener("scroll", () => {
         loadedPages++;
         searchImages();
     }
-});
+});*/
 
 
 
